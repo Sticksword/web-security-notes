@@ -9,11 +9,10 @@ __Special thanks to CodePath for letting me take their Web Security course and l
  * Form input with value `<script>alert('XSS!');</script>` and then echoing this value upon form submit somewhere down the road
  * Query string input with value `example.php?id=%3Cscript%3Ealert%28%27XSS%21%27%29%3B%3C%2Fscript%3E` and then echoing this value on page load (similar to above)
  * These scripts can be non-persistent as demonstrated above or persisted. When fetching from a database, the values still have to be escaped since we store the actual values in the DB, not the escaped versions.
-* __Related threats__: clickjacking (where HTML/JS is injected so that there is an invisible iframe or button on top of visible button) and cursorjacking (where cursor location is skewed by `x` pixels so that what you see isn't actually where cursor is)
+* __Related threats__: clickjacking (where HTML/JS is injected so that there is an invisible iframe or button on top of visible button), cursorjacking (where cursor location is skewed by `x` pixels so that what you see isn't actually where cursor is), cookie theft/manipulation (sending browser cookie info elsewhere)
 * __Solution__: use `htmlspecialchars()` whenever outputting data from potentially untrusted sources
 * __See more__:
  * http://stackoverflow.com/questions/4882307/when-to-use-htmlspecialchars-function
- 
  
 ### SQL Injection:
 * These attacks are a type of injection where ''nefarious'' SQL statements are inserted into an entry field for execution.
@@ -30,10 +29,20 @@ __Special thanks to CodePath for letting me take their Web Security course and l
 * __Examples__:
  * onload of `hacker-way.com`, the site can submit a form that mimics the Citi form for making a transaction
  * a CSRF get request can be hidden away in an image src link so that upon load, the GET request for the "image" is made
- * basically onload of a site, bad things can happen if there are authentication information stored in a browser unless protected against
+ * basically onload of a site, bad things can happen if there is authentication information stored in a browser unless protected against
 * __Solution__: First of all ensure same domains. One problem, the source domain can spoofed by the attacker. In that case, make GET requests harmless (only retrieval of non-sensitive information) and stick a CSRF token into all forms so that POST requests can be validated upon receipt.
-* __See more__:
- * TBD
+ 
+### Session hijacking:
+* Session ID's are sent per request and are also stored in cookies. If found out, an attacker can use the info to mascarade as the real user. No bueno.
+* __Examples__:
+ * From an XSS attack, a cookie's info can be stolen and from it, a session ID can be retrieved for ill use.
+ * If the connection is not over HTTPS, an attacker can listen in on the request and get the session ID.
+* __Solution__: Store session ID's in HttpOnly cookies (prevents attacker from finding out session ID in a cookie through XSS attack), only do HTTPS connections, refresh sessions every so often
+ 
+### Session fixation:
+* Kind of like opposite of sessioin hijacking, it's when you provide the user with a session ID to use so that they authenticate through that session ID. After authenticating, the attacker now has an authenticated session ID to use for ill means.
+* How can a session ID be "given" or set? You can alter responses via Man in the Middle attacks, affix a session ID to any url of a website so that the browser then uses that as the session ID, set it via XSS, 
+* __Solution__: Use HttpOnly cookies to prevent XSS session fixation (JS cannot access HttpOnly cookies), don't accept session ID's as GET or POST params, and most importantly, refresh session identifiers after login (erases all previous fixations)
 
 ### Sample attack markup format:
 * description
