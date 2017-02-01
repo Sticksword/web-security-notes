@@ -1,5 +1,7 @@
 # web-security-notes
-This is my user-friendly version of what I learned muddling around with web security stuff that I hope can be of use to you! :)
+This is my user-friendly version of what I learned muddling around with web security stuff that I hope can be of use to you. Feel free to contribute! Simply fork and make a pull request :)
+
+__Special thanks to CodePath for letting me take their Web Security course and learning all of this!!__
 
 ### XSS:
 * These attacks are a type of injection where malicious scripts are injected into normal websites that don't cleanse the data they output to the screen. In general to prevent XSS attacks, never accept JS code from an untrusted source and then run it.
@@ -22,6 +24,16 @@ This is my user-friendly version of what I learned muddling around with web secu
 * __See more__:
  * http://stackoverflow.com/questions/11653059/when-to-use-mysqli-real-escape-string
  * http://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php
+
+### Cross Site Request Forgery (CSRF attacks):
+* A hacker site that is not same domain as an important site like `Citi.com` can mimic a request by forcing a user to make a GET or POST request upon loading of the hacker site. This in combination with the browser's stored authentication can lead to problems since the request will then be authenticated and potentially carried through.
+* __Examples__:
+ * onload of `hacker-way.com`, the site can submit a form that mimics the Citi form for making a transaction
+ * a CSRF get request can be hidden away in an image src link so that upon load, the GET request for the "image" is made
+ * basically onload of a site, bad things can happen if there are authentication information stored in a browser unless protected against
+* __Solution__: First of all ensure same domains. One problem, the source domain can spoofed by the attacker. In that case, make GET requests harmless (only retrieval of non-sensitive information) and stick a CSRF token into all forms so that POST requests can be validated upon receipt.
+* __See more__:
+ * TBD
 
 ### Sample attack markup format:
 * description
