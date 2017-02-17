@@ -40,9 +40,11 @@ __Special thanks to CodePath for letting me take their Web Security course and l
 * __Solution__: Store session ID's in HttpOnly cookies (prevents attacker from finding out session ID in a cookie through XSS attack), only do HTTPS connections, refresh sessions every so often
  
 ### Session fixation:
-* Kind of like opposite of sessioin hijacking, it's when you provide the user with a session ID to use so that they authenticate through that session ID. After authenticating, the attacker now has an authenticated session ID to use for ill means.
+* Kind of like opposite of session hijacking, it's when you provide the user with a session ID to use so that they authenticate through that session ID. After authenticating, the attacker now has an authenticated session ID to use for ill means.
 * How can a session ID be "given" or set? You can alter responses via Man in the Middle attacks, affix a session ID to any url of a website so that the browser then uses that as the session ID, set it via XSS, 
-* __Solution__: Use HttpOnly cookies to prevent XSS session fixation (JS cannot access HttpOnly cookies), don't accept session ID's as GET or POST params, and most importantly, refresh session identifiers after login (erases all previous fixations)
+* __Solution__: Use HttpOnly cookies to prevent XSS session fixation (JS cannot access HttpOnly cookies), don't accept session ID's as GET or POST params, and most importantly, refresh session identifiers after login (erases all previous fixations)(use `session_regenerate_id()`)
+* __See more__:
+ * http://stackoverflow.com/questions/22965067/when-and-why-i-should-use-session-regenerate-id
 
 ### Sample attack markup format:
 * description
