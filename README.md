@@ -30,7 +30,7 @@ __Special thanks to CodePath for letting me take their Web Security course and l
  * onload of `hacker-way.com`, the site can submit a form that mimics the Citi form for making a transaction
  * a CSRF get request can be hidden away in an image src link so that upon load, the GET request for the "image" is made
  * basically onload of a site, bad things can happen if there is authentication information stored in a browser unless protected against
-* __Solution__: First of all ensure same domains. One problem, the source domain can spoofed by the attacker. In that case, make GET requests harmless (only retrieval of non-sensitive information) and stick a CSRF token into all forms so that POST requests can be validated upon receipt.
+* __Solution__: First of all ensure same domains. One problem, the source domain can spoofed by the attacker. In that case, make GET requests harmless (only retrieval of non-sensitive information) and stick a CSRF token into all forms (eg. hidden <input> csrf token in post param) so that POST requests can be validated upon receipt.
  
 ### Session hijacking:
 * Session ID's are sent per request and are also stored in cookies. If found out, an attacker can use the info to mascarade as the real user. No bueno.
