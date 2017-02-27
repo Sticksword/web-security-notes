@@ -1,7 +1,7 @@
 # Whollistic viewpoint of security in my own words
 This way, you're not thinking "why am I doing this" and more so "ohh so this is how it fits into the bigger picture". It's also to peak your interest and show you what is possible.
 
-## __Application Security__
+## ==============Application Security==============
 
 ## Input Validation
 When you build an application, you want to check for valid input to prevent malicious 
@@ -78,12 +78,16 @@ When you build an application, make sure when things go wrong, you don't tell th
 * Information disclosure
 * Senial of service
 
-## __OTHER__
+## ==============Misc Security==============
 
 ## Malware download and phishing
-When you visit websites, often times there will be attempts to run
+When you visit websites, often times there will be attempts to install/run software on your local machine.
 ### Possible attacks
 * Software gets downloaded and user accidentally runs it
 * Software installs a Chrome extension and user accidentally accepts it
 * Email sent out pretending to be from authorized source and you provide authentication credentials
 
+## Malware/virus detection
+When you have malware, how do you detect and remove it?
+### Possible solutions
+* Use anomaly detection method by running supervised learning algorithms to see what files can be labeled as "malware" and what not to label as "malware".
